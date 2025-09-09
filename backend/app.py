@@ -5,19 +5,20 @@ import os
 from dotenv import load_dotenv
 
 # Load variables from .env file
-load_dotenv()
+load_dotenv(dotenv_path="../.env")
 app = Flask(__name__)
 CORS(app) 
 
 # THIS IS BAD PRACTICE, DO NOT PUT API KEY OUTSIDE OF ENVIRONMENT VARIABLE FILES
 # REFER TO THE DOCUMENTS TO COMPLETE THE PROJECT
-CTA_API_KEY = "524e55641a6c4655a2378d3644ca06f3"
+CTA_API_KEY = os.getenv("CTA_KEY_TRAIN")
 
 @app.route("/")
 def get_cta_trains():
     """
     Fetches real-time train data from CTA API and returns JSON.
     """
+    print(CTA_API_KEY)
     url = f"http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key={CTA_API_KEY}&mapid=40790&outputType=JSON"
     
     try:
