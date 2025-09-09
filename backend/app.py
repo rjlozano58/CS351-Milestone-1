@@ -18,12 +18,12 @@ def get_cta_trains():
     """
     Fetches real-time train data from CTA API and returns JSON.
     """
-    print(CTA_API_KEY)
     url = f"http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key={CTA_API_KEY}&mapid=40790&outputType=JSON"
     
     try:
         response = requests.get(url)
         data = response.json()
+        print(jsonify(data))
         return jsonify(data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
